@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.member">
+
+	<resultMap type="memberVO" id="memResult">
+		<result property="id" column="id" />
+		<result property="pwd" column="pwd" />
+		<result property="name" column="name" />
+		<result property="email" column="email" />
+		<result property="joinDate" column="joinDate" />
+
+	</resultMap>
+
+
+
+	<select id="selectAllMemberList" resultMap="memResult">
+
+	<![CDATA[ 
+	
+	select * from t_member	order by joinDate desc
+	
+	 ]]>
+
+	</select>
+
+
+	<insert id="addMember" parameterType="memberVO">
+
+	<![CDATA[
+		 insert into t_member(id,pwd, name, email)
+		 values(#{id}, #{pwd}, #{name}, #{email})
+		]]>
+
+
+	</insert>
+
+	<delete id="delMember" parameterType="String">
+
+
+	<![CDATA[
+	   delete from  t_member
+	   where
+	   id=#{id}
+	]]>
+
+	</delete>
+
+
+
+	<select id="searchMemberbyName" parameterType="String"
+		resultMap="memResult">
+
+<!-- 	<![CDATA[ 
+	
+	select * from t_member	 where name = #{name} order by joinDate desc
+	
+	 ]]> -->
+
+
+<![CDATA[ 
+	
+	select * from t_member	 where name like '%' ||  #{name}  || '%' order by joinDate desc
+	
+	 ]]>
+
+
+
+	</select>
+
+
+
+	<select id="searchMemberbyID" parameterType="String"
+		resultType="memberVO">
+
+	<![CDATA[ 
+	
+	select * from t_member	 where id = #{id} 
+	
+	 ]]>
+
+	</select>
+
+
+
+
+
+	<update id="updateMember" parameterType="memberVO">
+
+   <![CDATA[
+	     update t_member
+	     set pwd=#{pwd}, name=#{name}, email=#{email}
+	     where id=#{id}
+      ]]>
+
+
+	</update>
+
+
+
+	<select id="selectMemberByNameOrEmail" parameterType="String"
+		resultMap="memResult">
+
+
+  <![CDATA[
+	     select * from t_member	
+      ]]>
+
+		<where>
+
+			<choose>
+			
+				<!-- <when test="name != '' and name !=null email != '' and email !=null">
+					name = #{nameOrEmail} or  email = #{nameOrEmail}
+				</when> -->
+			
+			
+			   	<when test="nameOrEmail != '' and nameOrEmail !=null ">
+					name = #{nameOrEmail} or  email = #{nameOrEmail}
+				</when>		
+				
+				<otherwise>
+					name = #{''} and  email = #{''}
+				</otherwise>
+				
+			</choose>
+
+			order by joinDate desc
+
+		</where>
+
+	</select>
+
+
+
+
+  <select id="loginById"  resultType="memberVO"   parameterType="memberVO" >
+	<![CDATA[
+		select * from t_member	
+		where id=#{id} and pwd=#{pwd}		
+	]]>
+  </select>
+
+
+
+
+
+
+
+
+</mapper>
+
