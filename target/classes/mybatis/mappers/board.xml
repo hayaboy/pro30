@@ -101,14 +101,19 @@
 	 
   <insert id="insertNewArticle"  parameterType="java.util.Map">
 		<![CDATA[
-			INSERT into t_board(articleNO,  title, content, imageFileName, id)
-			VALUES(#{articleNO},#{title},	#{content}, #{imageFileName},	#{id})
+			INSERT into t_board(articleNO, parentNO, title, content, imageFileName, id)
+			VALUES(#{articleNO},#{parentNO}, #{title}, 	#{content}, #{imageFileName},	#{id})
 		]]>      
 	</insert>
 	
 	
 	
-	
+<!-- 	<insert id="insertNewArticle"  parameterType="java.util.Map">
+		<![CDATA[
+			INSERT into t_board(articleNO,  title, content, imageFileName, id)
+			VALUES(#{articleNO},#{title},	#{content}, #{imageFileName},	#{id})
+		]]>      
+	</insert> -->
 	
 	
 	
