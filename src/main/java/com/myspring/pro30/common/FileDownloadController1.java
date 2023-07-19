@@ -16,15 +16,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller("fileDownloadController1")
 public class FileDownloadController1 {
 
-	private static String CURR_IMAGE_REPO_PATH ="C:\\spring\\image_repo";
+	private static String CURR_IMAGE_REPO_PATH ="C:\\board\\article_image";
 	
 	@RequestMapping(value = "/download1", method = RequestMethod.GET)
-	public void download(@RequestParam("imageFileName") String imageFileName,   HttpServletRequest request, HttpServletResponse response)throws Exception {
+	public void download(@RequestParam("imageFileName") String imageFileName,  	@RequestParam("articleNO") String articleNO, HttpServletRequest request, HttpServletResponse response)throws Exception {
 		
 		
 		OutputStream out = response.getOutputStream();
 		
-		String downFile = CURR_IMAGE_REPO_PATH + "\\" + imageFileName;
+		String downFile = CURR_IMAGE_REPO_PATH + "\\" + articleNO+ "\\" + imageFileName;
 		
 		
 		File file = new File(downFile);

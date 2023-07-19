@@ -27,9 +27,14 @@
 	
 	
 	
-	<definition name="/member/loginForm" extends="baseLayout">
-      <put-attribute name="title" value="로그인창" />
-      <put-attribute name="body" value="/WEB-INF/views/member/loginForm.jsp" />
+	<definition name="/member/loginForm1" extends="baseLayout">
+      <put-attribute name="title" value="로그인창1" />
+      <put-attribute name="body" value="/WEB-INF/views/member/loginForm1.jsp" />
+   </definition>
+	
+	<definition name="/member/loginForm2" extends="baseLayout">
+      <put-attribute name="title" value="로그인창2" />
+      <put-attribute name="body" value="/WEB-INF/views/member/loginForm2.jsp" />
    </definition>
 	
 	

@@ -1,6 +1,7 @@
 package com.myspring.pro30.member.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
@@ -19,6 +20,10 @@ public interface MemberDAO {
 	
 	
 	public void delMember(String id) throws DataAccessException ;
+	
+	
+	public void updateArticle(Map articleMap) throws DataAccessException;
+	
 	
 	public MemberVO searchMemberbyID(String id) throws DataAccessException ;
 		

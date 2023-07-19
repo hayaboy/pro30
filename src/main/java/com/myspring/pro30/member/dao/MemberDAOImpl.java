@@ -1,6 +1,7 @@
 package com.myspring.pro30.member.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +74,12 @@ public class MemberDAOImpl implements MemberDAO {
 	public MemberVO loginById(MemberVO memberVO){
 		MemberVO member=(MemberVO) sqlSession.selectOne("mapper.member.loginById", memberVO);
 		return member;
+	}
+
+	@Override
+	public void updateArticle(Map articleMap) throws DataAccessException {
+	
+		sqlSession.update("mapper.board.updateArticle", articleMap);
 	}
 
 	

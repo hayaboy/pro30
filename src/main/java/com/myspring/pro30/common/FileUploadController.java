@@ -22,7 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 
-@Controller("fileUploadController")
+//@Controller("fileUploadController")
 public class FileUploadController {
 	private static final Logger logger = LoggerFactory.getLogger(FileUploadController.class);
 	private static final String CURR_IMAGE_REPO_PATH = "c:\\spring\\image_repo";
@@ -34,7 +34,7 @@ public class FileUploadController {
 
 	
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public ModelAndView upload(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)throws Exception{
+	public ModelAndView upload(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception{
 		logger.info("여기는 upload 메서드 영역");
 		Map map = new HashMap();
 		

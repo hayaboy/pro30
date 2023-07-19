@@ -40,7 +40,7 @@ public class MemberControllerImpl    implements MemberController{
 	private MemberService memberService;
 	
 	
-	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
+	@RequestMapping(value = {"/","/main.do"}, method = RequestMethod.GET)
 	public String main(Locale locale, Model model) {
 
 		logger.info("당신은 지금 main.do를 쳐서 메이페이지를 요청함");
@@ -50,17 +50,10 @@ public class MemberControllerImpl    implements MemberController{
 	}
 	
 	
-	
-	
-	
-	
-//	public void setMemberService(MemberService memberService) {
-//		this.memberService = memberService;
-//	}
 
 
-	@RequestMapping(value = "/member/loginForm.do", method = RequestMethod.GET)
-	public ModelAndView loginForm(@RequestParam(value= "result", required=false) String result,HttpServletRequest request, HttpServletResponse response) throws Exception{
+	@RequestMapping(value = "/member/loginForm1.do", method = RequestMethod.GET)
+	public ModelAndView loginForm1(@RequestParam(value= "result", required=false) String result,HttpServletRequest request, HttpServletResponse response) throws Exception{
 		//String viewName=getViewName(request);
 		
 		String viewName=(String) request.getAttribute("viewName");
@@ -72,7 +65,18 @@ public class MemberControllerImpl    implements MemberController{
 		return mav;
 	}
 	
-	
+	@RequestMapping(value = "/member/loginForm2.do", method = RequestMethod.GET)
+	public ModelAndView loginForm2(@RequestParam(value= "result", required=false) String result,HttpServletRequest request, HttpServletResponse response) throws Exception{
+		//String viewName=getViewName(request);
+		
+		String viewName=(String) request.getAttribute("viewName");
+		logger.info("뷰네임" + viewName);
+		ModelAndView mav= new ModelAndView(viewName);
+		
+		mav.addObject("result",result);
+		
+		return mav;
+	}
 	
 
 
@@ -118,13 +122,13 @@ public class MemberControllerImpl    implements MemberController{
 		session.removeAttribute("isLogOn");
 		session.invalidate();
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/member/listMembers.do");
+		mav.setViewName("redirect:/member/loginForm1.do");
 		return mav;
 	}
 
-	@RequestMapping(value = "/member/login.do", method = {RequestMethod.POST, RequestMethod.GET })
-	public ModelAndView login(@ModelAttribute("memberVO") MemberVO memberVO,  RedirectAttributes rAttr,HttpServletRequest request, HttpServletResponse response) throws Exception{
-		logger.info("로그인 하는 과정으로 들어옴");
+	@RequestMapping(value = "/member/login1.do", method = {RequestMethod.POST, RequestMethod.GET })
+	public ModelAndView login1(@ModelAttribute("memberVO") MemberVO memberVO,  RedirectAttributes rAttr,HttpServletRequest request, HttpServletResponse response) throws Exception{
+		logger.info("회원관리를 위한 로그인 하는 과정으로 들어옴");
 		logger.info(memberVO.getId());
 		//memberVO=memberService.searchMemberbyID(member.getId());
 		
@@ -139,6 +143,10 @@ public class MemberControllerImpl    implements MemberController{
 			sess.setAttribute("member", memberVO);
 			sess.setAttribute("isLogon", true);
 			
+			
+			
+			
+			
 			ModelAndView mav= new ModelAndView();			
 			
 //			List<MemberVO> membersList= memberService.listMembers();
@@ -150,10 +158,37 @@ public class MemberControllerImpl    implements MemberController{
 		}else {
 			rAttr.addAttribute("result", "loginFailed");
 			ModelAndView mav= new ModelAndView();
-			mav.setViewName("redirect:/member/loginForm.do");
+			mav.setViewName("redirect:/member/loginForm1.do");
 			return mav;
 		}
 		
+	}
+		@RequestMapping(value = "/member/login2.do", method = {RequestMethod.POST, RequestMethod.GET })
+		public ModelAndView login2(@ModelAttribute("memberVO") MemberVO memberVO,  RedirectAttributes rAttr,HttpServletRequest request, HttpServletResponse response) throws Exception{
+			logger.info("게시판 관리를 위한 로그인 하는 과정으로 들어옴");
+			logger.info(memberVO.getId());			
+			
+			memberVO=memberService.loginById(memberVO);
+			
+			logger.info("로그인객체"+memberVO);			
+			
+			if(memberVO != null) {
+				logger.info("로그인성공");
+				HttpSession sess=request.getSession();
+				sess.setAttribute("member", memberVO);
+				sess.setAttribute("isLogon", true);						
+				
+				ModelAndView mav= new ModelAndView();			
+
+				mav.setViewName("redirect:/board/listArticles.do");
+				
+				return mav;
+			}else {
+				rAttr.addAttribute("result", "loginFailed");
+				ModelAndView mav= new ModelAndView();
+				mav.setViewName("redirect:/member/loginForm2.do");
+				return mav;
+			}
 		
 		
 	}

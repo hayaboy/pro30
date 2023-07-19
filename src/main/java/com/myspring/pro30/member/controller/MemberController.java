@@ -15,8 +15,8 @@ import com.myspring.pro30.member.vo.MemberVO;
 public interface MemberController {
 
 		public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception;
-		public ModelAndView login(@ModelAttribute("member") MemberVO member,  RedirectAttributes rAttr,HttpServletRequest request, HttpServletResponse response) throws Exception;
-		
+		public ModelAndView login1(@ModelAttribute("member") MemberVO member,  RedirectAttributes rAttr,HttpServletRequest request, HttpServletResponse response) throws Exception;
+		public ModelAndView login2(@ModelAttribute("member") MemberVO member,  RedirectAttributes rAttr,HttpServletRequest request, HttpServletResponse response) throws Exception;
 		
 		public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception;
 		

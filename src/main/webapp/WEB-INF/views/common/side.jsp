@@ -18,8 +18,8 @@
 <body>
 	<h1>사이드 메뉴</h1>
 	<h1>
-		<a href="${contextPath}/member/loginForm.do"  class="no-underline">회원관리</a><br>
-	    <a href="#"  class="no-underline">게시판관리</a><br>
+		<a href="${contextPath}/member/loginForm1.do"  class="no-underline">회원관리</a><br>
+	    <a href="${contextPath}/member/loginForm2.do"  class="no-underline">게시판관리</a><br>
 	    <a href="#"  class="no-underline">상품관리</a><br>
     </h1>
 </body>

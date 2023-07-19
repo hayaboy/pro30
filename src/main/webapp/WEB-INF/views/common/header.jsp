@@ -29,7 +29,7 @@
 			<td>
 			
 		 	<c:out value="${isLogon}"></c:out>
-		 	<c:if test="${isLogon!=true}"><td><a href="${contextPath}/member/loginForm.do"><h3>로그인</h3></a></td></c:if>
+		 	<c:if test="${isLogon!=true}"><td><a href="${contextPath}/member/loginForm1.do"><h3>로그인</h3></a></td></c:if>
 		 	<c:if test="${isLogon==true}"><td><a href="${contextPath}/member/logout.do"><h3>로그아웃</h3></a></td></c:if>
 			<c:out value="${member}"></c:out>
 			<c:out value="${member.name}"></c:out>
